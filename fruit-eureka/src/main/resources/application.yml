@@ -1,0 +1,14 @@
+server:
+  port: 8761
+spring:
+  application:
+    name: register-center
+eureka:
+  client:
+    #通过设置fetch-registry与register-with-eureka 表明自己是一个eureka服务
+    fetch-registry: false
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://localhost:${server.port}/eureka/
+
+

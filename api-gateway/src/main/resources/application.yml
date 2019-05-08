@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+      - id: product-id
+        uri: lb://PRODUCT
+        predicates:
+        - Path=/product/**
+      - id: cookie_route
+        uri: lb://PRODUCT
+        predicates:
+        - Cookie=token, ch.p
+      - id: order-id
+        uri: lb://ORDER
+        predicates:
+        - Path=/order/**
+      - id: user-id
+        uri: lb://USER
+        predicates:
+        - Path=/login/**
+
+
+
+#      routes:
+#        - id: product
+#          uri: lb://PRODUCT
+#          predicates:
+#            - Path=/product/**
+
+
+# Eureka 服务注册中心配置
+# Eureka 服务注册中心配置
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  # 配置优先使用IP地址注册服务
+  instance:
+    prefer-ip-address: true
+
+server:
+  port: 9000
